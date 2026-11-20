@@ -12,3 +12,10 @@ apres director et populatedata
 JsonSerializer :
 
 ![img_2.png](img_2.png)
+
+Singleton pattern with multi thread env : 
+
+![img_3.png](img_3.png)
+
+probleme : PLusieurs thread modifie la meme variable
+solution : synchronisation de cette variable
