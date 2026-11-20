@@ -10,7 +10,7 @@ public interface AccountRepository {
     BankAccount save(BankAccount bankAccount);
     List<BankAccount> findAll();
     Optional<BankAccount> findById(Long id);
-    List<BankAccount> searchAccount(Predicate<BankAccount> predicate);
+    List<BankAccount> searchAccounts(Predicate<BankAccount> predicate);
     BankAccount update(BankAccount bankAccount);
     void deleteById(Long id);
 
