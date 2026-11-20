@@ -15,6 +15,15 @@ import java.util.stream.Collectors;
 public class AccountRepositoryImpl implements AccountRepository {
     private Map<Long , BankAccount> bankAccountMap = new HashMap<>();
     private long accountsCount = 0;
+
+    private static final AccountRepositoryImpl accountRepository;
+    static {
+        System.out.println("Singleton instantiation");
+        accountRepository=new AccountRepositoryImpl();
+    }
+
+    private AccountRepositoryImpl(){};
+
     @Override
     public BankAccount save(BankAccount bankAccount) {
         Long accountId=++accountsCount;
@@ -64,5 +73,9 @@ public class AccountRepositoryImpl implements AccountRepository {
                     .build();
             save(account);
         }
+    }
+
+    public static AccountRepositoryImpl getInstance(){
+        return accountRepository;
     }
 }
