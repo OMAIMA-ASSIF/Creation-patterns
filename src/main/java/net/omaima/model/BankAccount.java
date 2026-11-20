@@ -71,4 +71,40 @@ public class BankAccount {
                 ", status=" + status +
                 '}';
     }
+    public static AccountBuilder builder(){
+        return new AccountBuilder();
+    }
+    //chaque methode va retourner la meme classe AccountBuilder
+    public static class AccountBuilder {
+        private BankAccount bankAccount = new BankAccount();
+
+        public AccountBuilder accountId(Long id){
+            bankAccount.accountId= id;
+            return this;
+        }
+
+        public AccountBuilder currency(String currency){
+            bankAccount.currency=currency;
+            return this;
+        }
+
+        public AccountBuilder balance(double balance){
+            bankAccount.balance=balance;
+            return this;
+        }
+
+        public AccountBuilder type(AccountType type){
+            bankAccount.type=type;
+            return this;
+        }
+
+        public AccountBuilder status(AccountStatus status){
+            bankAccount.status=status;
+            return this;
+        }
+
+        public BankAccount build(){
+            return this.bankAccount;
+        }
+    }
 }
