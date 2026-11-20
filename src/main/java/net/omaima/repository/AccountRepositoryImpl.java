@@ -1,6 +1,9 @@
 package net.omaima.repository;
 
+import net.omaima.model.AccountStatus;
+import net.omaima.model.AccountType;
 import net.omaima.model.BankAccount;
+import net.omaima.model.BankDirector;
 
 import java.util.HashMap;
 import java.util.List;
@@ -49,5 +52,17 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public void deleteById(Long id) {
         bankAccountMap.remove(id);
+    }
+
+    public void populateData(){
+        for (int i = 0; i < 10 ; i++) {
+            BankAccount account = BankDirector.accountBuilder()
+                    .balance(10000+Math.random()*90000)
+                    .type(Math.random()>0.5?AccountType.SAVING_ACCOUNT: AccountType.CURRENT_ACCOUNT)
+                    .status(Math.random()>0.5? AccountStatus.CREATED:AccountStatus.ACTIVATED)
+                    .currency(Math.random()>0.5?"MAD":"USD")
+                    .build();
+            save(account);
+        }
     }
 }
