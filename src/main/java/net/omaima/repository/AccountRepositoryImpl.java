@@ -25,11 +25,15 @@ public class AccountRepositoryImpl implements AccountRepository {
     private AccountRepositoryImpl(){};
 
     @Override
-    public synchronized BankAccount save(BankAccount bankAccount) {
-
+    public BankAccount save(BankAccount bankAccount) {
         Long accountId;
-        bankAccount.setAccountId(accountId);
-        bankAccountMap.put(accountId,bankAccount);
+        synchronized (this){
+            accountId =++accountsCount;
+        }
+        bankAccount.setAccountId(accountId); //Critical zone
+        synchronized (this){
+            bankAccountMap.put(accountId,bankAccount);
+        }
         return bankAccount;
     }
 
@@ -64,7 +68,7 @@ public class AccountRepositoryImpl implements AccountRepository {
         bankAccountMap.remove(id);
     }
 
-    public synchronized void populateData(){
+    public void populateData(){
         for (int i = 0; i < 10 ; i++) {
             BankAccount account = BankDirector.accountBuilder()
                     .balance(10000+Math.random()*90000)

@@ -19,3 +19,7 @@ Singleton pattern with multi thread env :
 
 probleme : PLusieurs thread modifie la meme variable
 solution : synchronisation de cette variable
+synchronisation de la mthode : 
+    probleme : On exploite pas le parallelisme.
+    solution : synchroniser seulement la zone critique
+
